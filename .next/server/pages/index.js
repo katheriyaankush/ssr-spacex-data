@@ -88,299 +88,88 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = "./pages/index.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 1:
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__("RNiq");
-
-
-/***/ }),
-
-/***/ "RNiq":
+/***/ "./component/Spinner/Spinner.js":
+/*!**************************************!*\
+  !*** ./component/Spinner/Spinner.js ***!
+  \**************************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
-
-// EXTERNAL MODULE: external "react"
-var external_react_ = __webpack_require__("cDcd");
-var external_react_default = /*#__PURE__*/__webpack_require__.n(external_react_);
-
-// EXTERNAL MODULE: ./container/space.module.css
-var space_module = __webpack_require__("oOKA");
-var space_module_default = /*#__PURE__*/__webpack_require__.n(space_module);
-
-// EXTERNAL MODULE: external "axios"
-var external_axios_ = __webpack_require__("zr5I");
-var external_axios_default = /*#__PURE__*/__webpack_require__.n(external_axios_);
-
-// EXTERNAL MODULE: ./component/Spinner/Spinner.module.css
-var Spinner_module = __webpack_require__("v4kl");
-var Spinner_module_default = /*#__PURE__*/__webpack_require__.n(Spinner_module);
-
-// CONCATENATED MODULE: ./component/Spinner/Spinner.js
-var __jsx = external_react_default.a.createElement;
-
-
-
-const spinner = () => __jsx("div", {
-  className: Spinner_module_default.a.Loader
-}, "Loading...");
-
-/* harmony default export */ var Spinner = (spinner);
-// CONCATENATED MODULE: ./container/space.js
-var space_jsx = external_react_default.a.createElement;
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-
-
-
-
-
-class space_Space extends external_react_["Component"] {
-  constructor(...args) {
-    super(...args);
-
-    _defineProperty(this, "state", {
-      year: [2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020],
-      spaceData: [],
-      spinner: false
-    });
-
-    _defineProperty(this, "yearFilter", year => {
-      let url = "https://api.spacexdata.com/v3/launches?limit=100&launch_success=true&land_success=true&launch_year=" + year;
-      this.setState({
-        spinner: true
-      });
-      external_axios_default()(url).then(resYear => {
-        this.setState({
-          spinner: false
-        });
-        this.setState({
-          spaceData: resYear.data
-        });
-      }).catch(err => {});
-    });
-
-    _defineProperty(this, "launchHandler", val => {
-      let url = "https://api.spacexdata.com/v3/launches?limit=100&launch_success=" + val;
-      this.setState({
-        spinner: true
-      });
-      external_axios_default()(url).then(res => {
-        this.setState({
-          spinner: false
-        });
-        this.setState({
-          spaceData: res.data
-        });
-      }).catch(err => {
-        this.setState({
-          spinner: false
-        });
-      });
-    });
-
-    _defineProperty(this, "landingHandler", val => {
-      let url = "https://api.spacexdata.com/v3/launches?limit=100&launch_success=true&land_success=" + val;
-      this.setState({
-        spinner: true
-      });
-      external_axios_default()(url).then(res => {
-        this.setState({
-          spinner: false
-        });
-        this.setState({
-          spaceData: res.data
-        });
-      }).catch(err => {
-        this.setState({
-          spinner: false
-        });
-      });
-    });
-  }
-
-  componentDidMount() {
-    //console.log("DibMount", this.props.data)
-    this.setState({
-      spaceData: this.props.data
-    });
-  }
-
-  render() {
-    //console.log("Vaa==",this.state.spaceData[1]);
-    let dataElement = null;
-
-    if (this.state.spinner) {
-      dataElement = space_jsx(Spinner, null);
-    } else if (this.state.spaceData.length === 0) {
-      dataElement = space_jsx("h2", {
-        style: {
-          textAlign: 'center',
-          color: "red",
-          marginTop: '200px'
-        }
-      }, "Oops!.....No Record Found");
-    } else {
-      dataElement = space_jsx("div", {
-        className: space_module_default.a.divMain
-      }, this.state.spaceData.map(res => {
-        return space_jsx("div", {
-          className: space_module_default.a.divCol,
-          key: res.launch_date_unix
-        }, space_jsx("p", {
-          className: space_module_default.a.falconId
-        }, "FalconSat #", res.flight_number), space_jsx("label", {
-          className: space_module_default.a.label
-        }, " Mission Name:"), space_jsx("p", {
-          className: space_module_default.a.p
-        }, res.mission_name), space_jsx("br", null), space_jsx("label", {
-          className: space_module_default.a.label
-        }, " Launch Year:"), space_jsx("p", {
-          className: space_module_default.a.p
-        }, res.launch_year), space_jsx("br", null), space_jsx("label", {
-          className: space_module_default.a.label
-        }, " Sucessful Launch:"), space_jsx("p", {
-          className: space_module_default.a.p
-        }, res.launch_success ? "true" : "false"), space_jsx("br", null), space_jsx("label", {
-          className: space_module_default.a.label
-        }, " Sucessful Landing:"), space_jsx("p", {
-          className: space_module_default.a.p
-        }, res.rocket.first_stage.cores[0].land_success ? "true" : "false"));
-      }));
-    }
-
-    return space_jsx("div", {
-      className: space_module_default.a.div
-    }, space_jsx("h2", {
-      style: {
-        marginLeft: '20px'
-      }
-    }, "SpaceX Launch Program"), space_jsx("div", {
-      className: space_module_default.a.divFillter
-    }, space_jsx("h3", null, "Filter"), space_jsx("p", {
-      style: {
-        textAlign: 'center',
-        marginBottom: '-6px'
-      }
-    }, "Sucessful Launch"), space_jsx("hr", null), space_jsx("div", {
-      className: space_module_default.a.buttonDiv
-    }, space_jsx("button", {
-      onClick: () => this.launchHandler(true),
-      className: space_module_default.a.button2
-    }, "True"), space_jsx("button", {
-      onClick: () => this.launchHandler(false),
-      className: space_module_default.a.button2
-    }, "False")), space_jsx("p", {
-      style: {
-        textAlign: 'center',
-        marginBottom: '-6px'
-      }
-    }, "Sucessful Landing"), space_jsx("hr", null), space_jsx("div", {
-      className: space_module_default.a.buttonDiv
-    }, space_jsx("button", {
-      onClick: () => this.landingHandler(true),
-      className: space_module_default.a.button2
-    }, "True"), space_jsx("button", {
-      onClick: () => this.landingHandler(false),
-      className: space_module_default.a.button2
-    }, "False")), space_jsx("p", {
-      style: {
-        textAlign: 'center',
-        marginBottom: '-6px'
-      }
-    }, "Launch Year"), space_jsx("hr", null), this.state.year.map(y => {
-      return space_jsx("div", {
-        key: y,
-        className: space_module_default.a.buttonDiv
-      }, space_jsx("button", {
-        onClick: () => this.yearFilter(y),
-        className: space_module_default.a.button
-      }, " ", y, "  "));
-    })), dataElement);
-  }
-
-}
-
-/* harmony default export */ var space = (space_Space);
-// CONCATENATED MODULE: ./pages/index.js
-var pages_jsx = external_react_default.a.createElement;
-
-
-
-class pages_Users extends external_react_["Component"] {
-  static async getInitialProps(ctx) {
-    const res = await fetch('https://api.spacexdata.com/v3/launches?limit=100');
-    const json = await res.json();
-    return {
-      appData: json
-    };
-  }
-
-  render() {
-    return pages_jsx("div", null, pages_jsx(space, {
-      data: this.props.appData
-    }));
-  }
-
-}
-
-/* harmony default export */ var pages = __webpack_exports__["default"] = (pages_Users);
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _Spinner_module_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Spinner.module.css */ \"./component/Spinner/Spinner.module.css\");\n/* harmony import */ var _Spinner_module_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_Spinner_module_css__WEBPACK_IMPORTED_MODULE_1__);\nvar _jsxFileName = \"/Users/localadmin/Downloads/Training/GitHupProjects/my-space-ssr/component/Spinner/Spinner.js\";\nvar __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;\n\n\n\nconst spinner = () => __jsx(\"div\", {\n  className: _Spinner_module_css__WEBPACK_IMPORTED_MODULE_1___default.a.Loader,\n  __self: undefined,\n  __source: {\n    fileName: _jsxFileName,\n    lineNumber: 6,\n    columnNumber: 1\n  }\n}, \"Loading...\");\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (spinner);//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9jb21wb25lbnQvU3Bpbm5lci9TcGlubmVyLmpzP2ZkMDIiXSwibmFtZXMiOlsic3Bpbm5lciIsInN0eWxlcyIsIkxvYWRlciJdLCJtYXBwaW5ncyI6Ijs7Ozs7OztBQUFBO0FBQ0E7O0FBRUEsTUFBTUEsT0FBTyxHQUFDLE1BRWQ7QUFBSyxXQUFTLEVBQUVDLDBEQUFNLENBQUNDLE1BQXZCO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUEsZ0JBRkE7O0FBTWVGLHNFQUFmIiwiZmlsZSI6Ii4vY29tcG9uZW50L1NwaW5uZXIvU3Bpbm5lci5qcy5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBSZWFjdCBmcm9tICdyZWFjdCc7XG5pbXBvcnQgc3R5bGVzIGZyb20gICcuL1NwaW5uZXIubW9kdWxlLmNzcyc7XG5cbmNvbnN0IHNwaW5uZXI9KCk9PihcblxuPGRpdiBjbGFzc05hbWU9e3N0eWxlcy5Mb2FkZXJ9PkxvYWRpbmcuLi48L2Rpdj5cblxuXG4pO1xuZXhwb3J0IGRlZmF1bHQgc3Bpbm5lcjsiXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./component/Spinner/Spinner.js\n");
 
 /***/ }),
 
-/***/ "cDcd":
+/***/ "./component/Spinner/Spinner.module.css":
+/*!**********************************************!*\
+  !*** ./component/Spinner/Spinner.module.css ***!
+  \**********************************************/
+/*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = require("react");
+eval("// Exports\nmodule.exports = {\n\t\"Loader\": \"Spinner_Loader__1sjje\",\n\t\"load1\": \"Spinner_load1__2MbOe\"\n};\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9jb21wb25lbnQvU3Bpbm5lci9TcGlubmVyLm1vZHVsZS5jc3M/ZjI4MCJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUNBIiwiZmlsZSI6Ii4vY29tcG9uZW50L1NwaW5uZXIvU3Bpbm5lci5tb2R1bGUuY3NzLmpzIiwic291cmNlc0NvbnRlbnQiOlsiLy8gRXhwb3J0c1xubW9kdWxlLmV4cG9ydHMgPSB7XG5cdFwiTG9hZGVyXCI6IFwiU3Bpbm5lcl9Mb2FkZXJfXzFzamplXCIsXG5cdFwibG9hZDFcIjogXCJTcGlubmVyX2xvYWQxX18yTWJPZVwiXG59O1xuIl0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./component/Spinner/Spinner.module.css\n");
 
 /***/ }),
 
-/***/ "oOKA":
-/***/ (function(module, exports) {
+/***/ "./container/space.js":
+/*!****************************!*\
+  !*** ./container/space.js ***!
+  \****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-// Exports
-module.exports = {
-	"divMain": "space_divMain__3VJRY",
-	"divCol": "space_divCol__3FJz0",
-	"buttonDiv": "space_buttonDiv__1ZR4G",
-	"button": "space_button__1mK0N",
-	"button2": "space_button2__1S43b",
-	"divFillter": "space_divFillter__3TZMo",
-	"div": "space_div__2xkVz",
-	"falconId": "space_falconId__2pCAR",
-	"label": "space_label__2q1wR",
-	"p": "space_p__1IDlp"
-};
-
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _space_module_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./space.module.css */ \"./container/space.module.css\");\n/* harmony import */ var _space_module_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_space_module_css__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ \"axios\");\n/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var _component_Spinner_Spinner__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../component/Spinner/Spinner */ \"./component/Spinner/Spinner.js\");\nvar _jsxFileName = \"/Users/localadmin/Downloads/Training/GitHupProjects/my-space-ssr/container/space.js\";\nvar __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;\n\nfunction _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }\n\n\n\n\n\n\n\nclass Space extends react__WEBPACK_IMPORTED_MODULE_0__[\"Component\"] {\n  constructor(...args) {\n    super(...args);\n\n    _defineProperty(this, \"state\", {\n      year: [2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020],\n      spaceData: [],\n      spinner: false,\n      error: false\n    });\n\n    _defineProperty(this, \"yearFilter\", year => {\n      let url = \"https://api.spacexdata.com/v3/launches?limit=100&launch_success=true&land_success=true&launch_year=\" + year;\n      this.setState({\n        spinner: true\n      });\n      axios__WEBPACK_IMPORTED_MODULE_2___default()(url).then(resYear => {\n        this.setState({\n          spinner: false\n        });\n        this.setState({\n          spaceData: resYear.data\n        });\n      }).catch(err => {\n        this.setState({\n          spinner: false\n        });\n        this.setState({\n          error: true\n        });\n      });\n    });\n\n    _defineProperty(this, \"launchHandler\", val => {\n      let url = \"https://api.spacexdata.com/v3/launches?limit=100&launch_success=\" + val;\n      this.setState({\n        spinner: true\n      });\n      axios__WEBPACK_IMPORTED_MODULE_2___default()(url).then(res => {\n        this.setState({\n          spinner: false\n        });\n        this.setState({\n          spaceData: res.data\n        });\n      }).catch(err => {\n        this.setState({\n          spinner: false\n        });\n        this.setState({\n          error: true\n        });\n      });\n    });\n\n    _defineProperty(this, \"landingHandler\", val => {\n      let url = \"https://api.spacexdata.com/v3/launches?limit=100&launch_success=true&land_success=\" + val;\n      this.setState({\n        spinner: true\n      });\n      axios__WEBPACK_IMPORTED_MODULE_2___default()(url).then(res => {\n        this.setState({\n          spinner: false\n        });\n        this.setState({\n          spaceData: res.data\n        });\n      }).catch(err => {\n        this.setState({\n          spinner: false\n        });\n        this.setState({\n          error: true\n        });\n      });\n    });\n  }\n\n  componentDidMount() {\n    this.setState({\n      spaceData: this.props.data\n    });\n  }\n\n  render() {\n    let dataElement = null;\n\n    if (this.state.spinner) {\n      dataElement = __jsx(_component_Spinner_Spinner__WEBPACK_IMPORTED_MODULE_3__[\"default\"], {\n        __self: this,\n        __source: {\n          fileName: _jsxFileName,\n          lineNumber: 82,\n          columnNumber: 15\n        }\n      });\n    } else if (this.state.spaceData.length === 0) {\n      dataElement = __jsx(\"h2\", {\n        style: {\n          textAlign: 'center',\n          color: \"red\",\n          marginTop: '200px'\n        },\n        __self: this,\n        __source: {\n          fileName: _jsxFileName,\n          lineNumber: 86,\n          columnNumber: 17\n        }\n      }, \"Oops!.....No Record Found\");\n    } else if (this.state.error) {\n      dataElement = __jsx(\"h2\", {\n        style: {\n          textAlign: 'center',\n          color: \"red\",\n          marginTop: '200px'\n        },\n        __self: this,\n        __source: {\n          fileName: _jsxFileName,\n          lineNumber: 92,\n          columnNumber: 17\n        }\n      }, \"Oops!.....API Failed.. There are some issue in api or network.\");\n    } else {\n      dataElement = __jsx(\"div\", {\n        className: _space_module_css__WEBPACK_IMPORTED_MODULE_1___default.a.divMain,\n        __self: this,\n        __source: {\n          fileName: _jsxFileName,\n          lineNumber: 97,\n          columnNumber: 15\n        }\n      }, this.state.spaceData.map(res => {\n        return __jsx(\"div\", {\n          className: _space_module_css__WEBPACK_IMPORTED_MODULE_1___default.a.divCol,\n          key: res.launch_date_unix,\n          __self: this,\n          __source: {\n            fileName: _jsxFileName,\n            lineNumber: 100,\n            columnNumber: 1\n          }\n        }, __jsx(\"p\", {\n          className: _space_module_css__WEBPACK_IMPORTED_MODULE_1___default.a.falconId,\n          __self: this,\n          __source: {\n            fileName: _jsxFileName,\n            lineNumber: 101,\n            columnNumber: 1\n          }\n        }, \"FalconSat #\", res.flight_number), __jsx(\"label\", {\n          className: _space_module_css__WEBPACK_IMPORTED_MODULE_1___default.a.label,\n          __self: this,\n          __source: {\n            fileName: _jsxFileName,\n            lineNumber: 102,\n            columnNumber: 1\n          }\n        }, \" Mission Name:\"), __jsx(\"p\", {\n          className: _space_module_css__WEBPACK_IMPORTED_MODULE_1___default.a.p,\n          __self: this,\n          __source: {\n            fileName: _jsxFileName,\n            lineNumber: 103,\n            columnNumber: 1\n          }\n        }, res.mission_name), __jsx(\"br\", {\n          __self: this,\n          __source: {\n            fileName: _jsxFileName,\n            lineNumber: 104,\n            columnNumber: 1\n          }\n        }), __jsx(\"label\", {\n          className: _space_module_css__WEBPACK_IMPORTED_MODULE_1___default.a.label,\n          __self: this,\n          __source: {\n            fileName: _jsxFileName,\n            lineNumber: 106,\n            columnNumber: 1\n          }\n        }, \" Launch Year:\"), __jsx(\"p\", {\n          className: _space_module_css__WEBPACK_IMPORTED_MODULE_1___default.a.p,\n          __self: this,\n          __source: {\n            fileName: _jsxFileName,\n            lineNumber: 107,\n            columnNumber: 1\n          }\n        }, res.launch_year), __jsx(\"br\", {\n          __self: this,\n          __source: {\n            fileName: _jsxFileName,\n            lineNumber: 109,\n            columnNumber: 1\n          }\n        }), __jsx(\"label\", {\n          className: _space_module_css__WEBPACK_IMPORTED_MODULE_1___default.a.label,\n          __self: this,\n          __source: {\n            fileName: _jsxFileName,\n            lineNumber: 111,\n            columnNumber: 1\n          }\n        }, \" Sucessful Launch:\"), __jsx(\"p\", {\n          className: _space_module_css__WEBPACK_IMPORTED_MODULE_1___default.a.p,\n          __self: this,\n          __source: {\n            fileName: _jsxFileName,\n            lineNumber: 112,\n            columnNumber: 1\n          }\n        }, res.launch_success ? \"true\" : \"false\"), __jsx(\"br\", {\n          __self: this,\n          __source: {\n            fileName: _jsxFileName,\n            lineNumber: 115,\n            columnNumber: 1\n          }\n        }), __jsx(\"label\", {\n          className: _space_module_css__WEBPACK_IMPORTED_MODULE_1___default.a.label,\n          __self: this,\n          __source: {\n            fileName: _jsxFileName,\n            lineNumber: 117,\n            columnNumber: 1\n          }\n        }, \" Sucessful Landing:\"), __jsx(\"p\", {\n          className: _space_module_css__WEBPACK_IMPORTED_MODULE_1___default.a.p,\n          __self: this,\n          __source: {\n            fileName: _jsxFileName,\n            lineNumber: 118,\n            columnNumber: 1\n          }\n        }, res.rocket.first_stage.cores[0].land_success ? \"true\" : \"false\"));\n      }));\n    }\n\n    return __jsx(\"div\", {\n      className: _space_module_css__WEBPACK_IMPORTED_MODULE_1___default.a.div,\n      __self: this,\n      __source: {\n        fileName: _jsxFileName,\n        lineNumber: 131,\n        columnNumber: 1\n      }\n    }, __jsx(\"h2\", {\n      style: {\n        marginLeft: '20px'\n      },\n      __self: this,\n      __source: {\n        fileName: _jsxFileName,\n        lineNumber: 134,\n        columnNumber: 5\n      }\n    }, \"SpaceX Launch Program\"), __jsx(\"div\", {\n      className: _space_module_css__WEBPACK_IMPORTED_MODULE_1___default.a.divFillter,\n      __self: this,\n      __source: {\n        fileName: _jsxFileName,\n        lineNumber: 135,\n        columnNumber: 1\n      }\n    }, __jsx(\"h3\", {\n      __self: this,\n      __source: {\n        fileName: _jsxFileName,\n        lineNumber: 137,\n        columnNumber: 1\n      }\n    }, \"Filter\"), __jsx(\"p\", {\n      style: {\n        textAlign: 'center',\n        marginBottom: '-6px'\n      },\n      __self: this,\n      __source: {\n        fileName: _jsxFileName,\n        lineNumber: 139,\n        columnNumber: 1\n      }\n    }, \"Sucessful Launch\"), __jsx(\"hr\", {\n      __self: this,\n      __source: {\n        fileName: _jsxFileName,\n        lineNumber: 140,\n        columnNumber: 1\n      }\n    }), __jsx(\"div\", {\n      className: _space_module_css__WEBPACK_IMPORTED_MODULE_1___default.a.buttonDiv,\n      __self: this,\n      __source: {\n        fileName: _jsxFileName,\n        lineNumber: 141,\n        columnNumber: 1\n      }\n    }, __jsx(\"button\", {\n      onClick: () => this.launchHandler(true),\n      className: _space_module_css__WEBPACK_IMPORTED_MODULE_1___default.a.button2,\n      __self: this,\n      __source: {\n        fileName: _jsxFileName,\n        lineNumber: 142,\n        columnNumber: 1\n      }\n    }, \"True\"), __jsx(\"button\", {\n      onClick: () => this.launchHandler(false),\n      className: _space_module_css__WEBPACK_IMPORTED_MODULE_1___default.a.button2,\n      __self: this,\n      __source: {\n        fileName: _jsxFileName,\n        lineNumber: 143,\n        columnNumber: 1\n      }\n    }, \"False\")), __jsx(\"p\", {\n      style: {\n        textAlign: 'center',\n        marginBottom: '-6px'\n      },\n      __self: this,\n      __source: {\n        fileName: _jsxFileName,\n        lineNumber: 147,\n        columnNumber: 1\n      }\n    }, \"Sucessful Landing\"), __jsx(\"hr\", {\n      __self: this,\n      __source: {\n        fileName: _jsxFileName,\n        lineNumber: 148,\n        columnNumber: 1\n      }\n    }), __jsx(\"div\", {\n      className: _space_module_css__WEBPACK_IMPORTED_MODULE_1___default.a.buttonDiv,\n      __self: this,\n      __source: {\n        fileName: _jsxFileName,\n        lineNumber: 149,\n        columnNumber: 1\n      }\n    }, __jsx(\"button\", {\n      onClick: () => this.landingHandler(true),\n      className: _space_module_css__WEBPACK_IMPORTED_MODULE_1___default.a.button2,\n      __self: this,\n      __source: {\n        fileName: _jsxFileName,\n        lineNumber: 150,\n        columnNumber: 1\n      }\n    }, \"True\"), __jsx(\"button\", {\n      onClick: () => this.landingHandler(false),\n      className: _space_module_css__WEBPACK_IMPORTED_MODULE_1___default.a.button2,\n      __self: this,\n      __source: {\n        fileName: _jsxFileName,\n        lineNumber: 151,\n        columnNumber: 1\n      }\n    }, \"False\")), __jsx(\"p\", {\n      style: {\n        textAlign: 'center',\n        marginBottom: '-6px'\n      },\n      __self: this,\n      __source: {\n        fileName: _jsxFileName,\n        lineNumber: 153,\n        columnNumber: 1\n      }\n    }, \"Launch Year\"), __jsx(\"hr\", {\n      __self: this,\n      __source: {\n        fileName: _jsxFileName,\n        lineNumber: 154,\n        columnNumber: 1\n      }\n    }), this.state.year.map(y => {\n      return __jsx(\"div\", {\n        key: y,\n        className: _space_module_css__WEBPACK_IMPORTED_MODULE_1___default.a.buttonDiv,\n        __self: this,\n        __source: {\n          fileName: _jsxFileName,\n          lineNumber: 158,\n          columnNumber: 1\n        }\n      }, __jsx(\"button\", {\n        onClick: () => this.yearFilter(y),\n        className: _space_module_css__WEBPACK_IMPORTED_MODULE_1___default.a.button,\n        __self: this,\n        __source: {\n          fileName: _jsxFileName,\n          lineNumber: 159,\n          columnNumber: 1\n        }\n      }, \" \", y, \"  \"));\n    })), dataElement);\n  }\n\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Space);//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9jb250YWluZXIvc3BhY2UuanM/NTkwYiJdLCJuYW1lcyI6WyJTcGFjZSIsIkNvbXBvbmVudCIsInllYXIiLCJzcGFjZURhdGEiLCJzcGlubmVyIiwiZXJyb3IiLCJ1cmwiLCJzZXRTdGF0ZSIsImF4aW9zIiwidGhlbiIsInJlc1llYXIiLCJkYXRhIiwiY2F0Y2giLCJlcnIiLCJ2YWwiLCJyZXMiLCJjb21wb25lbnREaWRNb3VudCIsInByb3BzIiwicmVuZGVyIiwiZGF0YUVsZW1lbnQiLCJzdGF0ZSIsImxlbmd0aCIsInRleHRBbGlnbiIsImNvbG9yIiwibWFyZ2luVG9wIiwic3R5bGVzIiwiZGl2TWFpbiIsIm1hcCIsImRpdkNvbCIsImxhdW5jaF9kYXRlX3VuaXgiLCJmYWxjb25JZCIsImZsaWdodF9udW1iZXIiLCJsYWJlbCIsInAiLCJtaXNzaW9uX25hbWUiLCJsYXVuY2hfeWVhciIsImxhdW5jaF9zdWNjZXNzIiwicm9ja2V0IiwiZmlyc3Rfc3RhZ2UiLCJjb3JlcyIsImxhbmRfc3VjY2VzcyIsImRpdiIsIm1hcmdpbkxlZnQiLCJkaXZGaWxsdGVyIiwibWFyZ2luQm90dG9tIiwiYnV0dG9uRGl2IiwibGF1bmNoSGFuZGxlciIsImJ1dHRvbjIiLCJsYW5kaW5nSGFuZGxlciIsInkiLCJ5ZWFyRmlsdGVyIiwiYnV0dG9uIl0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7O0FBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTs7QUFHQSxNQUFNQSxLQUFOLFNBQW9CQywrQ0FBcEIsQ0FBOEI7QUFBQTtBQUFBOztBQUFBLG1DQUN4QjtBQUVGQyxVQUFJLEVBQUMsQ0FBQyxJQUFELEVBQU0sSUFBTixFQUFXLElBQVgsRUFBZ0IsSUFBaEIsRUFBcUIsSUFBckIsRUFBMEIsSUFBMUIsRUFBK0IsSUFBL0IsRUFBb0MsSUFBcEMsRUFBeUMsSUFBekMsRUFBOEMsSUFBOUMsRUFBbUQsSUFBbkQsRUFBd0QsSUFBeEQsRUFBOEQsSUFBOUQsRUFBbUUs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TCxDQUFvQixJQUFwQixDQUFyQjtBQUFpRCxlQUFTLEVBQUV2Qix3REFBTSxDQUFDc0IsT0FBbkU7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQSxjQURBLEVBRUE7QUFBUSxhQUFPLEVBQUUsTUFBSSxLQUFLQyxjQUFMLENBQW9CLEtBQXBCLENBQXJCO0FBQWtELGVBQVMsRUFBRXZCLHdEQUFNLENBQUNzQixPQUFwRTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBLGVBRkEsQ0FkQSxFQWtCQTtBQUFHLFdBQUssRUFBRTtBQUFDekIsaUJBQVMsRUFBRSxRQUFaO0FBQXNCc0Isb0JBQVksRUFBRTtBQUFwQyxPQUFWO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUEscUJBbEJBLEVBbUJBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUEsTUFuQkEsRUFvQkMsS0FBS3hCLEtBQUwsQ0FBV2xCLElBQVgsQ0FBZ0J5QixHQUFoQixDQUFxQnNCLENBQUQsSUFBSztBQUUxQixhQUNBO0FBQUssV0FBRyxFQUFJQSxDQUFaO0FBQWUsaUJBQVMsRUFBRXhCLHdEQUFNLENBQUNvQixTQUFqQztBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBLFNBQ0E7QUFBUSxlQUFPLEVBQUksTUFBSSxLQUFLSyxVQUFMLENBQWdCRCxDQUFoQixDQUF2QjtBQUEyQyxpQkFBUyxFQUFFeEIsd0RBQU0sQ0FBQzBCLE1BQTdEO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUEsY0FBdUVGLENBQXZFLE9BREEsQ0FEQTtBQU9DLEtBVEEsQ0FwQkQsQ0FKQSxFQXNDQzlCLFdBdENELENBREE7QUE4Q0s7O0FBeEt5Qjs7QUFnTGZuQixvRUFBZiIsImZpbGUiOiIuL2NvbnRhaW5lci9zcGFjZS5qcy5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBSZWFjdCx7Q29tcG9uZW50fSBmcm9tICdyZWFjdCc7XG5pbXBvcnQgc3R5bGVzIGZyb20gJy4vc3BhY2UubW9kdWxlLmNzcyc7XG5pbXBvcnQgYXhpb3MgZnJvbSAnYXhpb3MnO1xuaW1wb3J0IFNwaW5uZXIgZnJvbSAnLi4vY29tcG9uZW50L1NwaW5uZXIvU3Bpbm5lcidcbmltcG9ydCBzcGlubmVyIGZyb20gJy4uL2NvbXBvbmVudC9TcGlubmVyL1NwaW5uZXInO1xuXG5cbmNsYXNzIFNwYWNlIGV4dGVuZHMgQ29tcG9uZW50IHtcbnN0YXRlPXtcbiBcbiAgICB5ZWFyOlsyMDA2LDIwMDcsMjAwOCwyMDA5LDIwMTAsMjAxMSwyMDEyLDIwMTMsMjAxNCwyMDE1LDIwMTYsMjAxNywgMjAxOCwyMDE5LDIwMjAgXSxcbiAgICBzcGFjZURhdGE6W10sXG4gICAgc3Bpbm5lcjpmYWxzZSxcbiAgICBlcnJvcjpmYWxzZVxuXG59XG5cblxuXG5jb21wb25lbnREaWRNb3VudCgpe1xuXG4gICAgdGhpcy5zZXRTdGF0ZSh7c3BhY2VEYXRhOnRoaXMucHJvcHMuZGF0YX0pO1xufVxuXG55ZWFyRmlsdGVyPSh5ZWFyKT0+e1xuXG5sZXQgdXJsID0gXCJodHRwczovL2FwaS5zcGFjZXhkYXRhLmNvbS92My9sYXVuY2hlcz9saW1pdD0xMDAmbGF1bmNoX3N1Y2Nlc3M9dHJ1ZSZsYW5kX3N1Y2Nlc3M9dHJ1ZSZsYXVuY2hfeWVhcj1cIit5ZWFyO1xudGhpcy5zZXRTdGF0ZSh7c3Bpbm5lcjp0cnVlfSlcbmF4aW9zKHVybCkudGhlbigocmVzWWVhcik9PntcbiAgICB0aGlzLnNldFN0YXRlKHtzcGlubmVyOmZhbHNlfSlcbiAgIHRoaXMuc2V0U3RhdGUoe3NwYWNlRGF0YTpyZXNZZWFyLmRhdGF9KVxufSkuY2F0Y2goKGVycik9PnsgIFxuICAgIHRoaXMuc2V0U3RhdGUoe3NwaW5uZXI6ZmFsc2V9KVxuICAgIHRoaXMuc2V0U3RhdGUoe2Vycm9yOnRydWV9KVxufSlcblxuXG59XG5cblxubGF1bmNoSGFuZGxlcj0odmFsKT0+e1xuXG5sZXQgdXJsID0gXCJodHRwczovL2FwaS5zcGFjZXhkYXRhLmNvbS92My9sYXVuY2hlcz9saW1pdD0xMDAmbGF1bmNoX3N1Y2Nlc3M9XCIrdmFsO1xuXG5cblxudGhpcy5zZXRTdGF0ZSh7c3Bpbm5lcjp0cnVlfSlcbmF4aW9zKHVybCkudGhlbigocmVzKT0+e1xuICAgIHRoaXMuc2V0U3RhdGUoe3NwaW5uZXI6ZmFsc2V9KVxuICAgIHRoaXMuc2V0U3RhdGUoe3NwYWNlRGF0YTpyZXMuZGF0YX0pXG4gfSkuY2F0Y2goKGVycik9PntcbiAgICB0aGlzLnNldFN0YXRlKHtzcGlubmVyOmZhbHNlfSlcbiAgICB0aGlzLnNldFN0YXRlKHtlcnJvcjp0cnVlfSlcbiB9KVxufVxuXG5cblxuXG5sYW5kaW5nSGFuZGxlcj0odmFsKT0+e1xuXG4gICAgbGV0IHVybCA9IFwiaHR0cHM6Ly9hcGkuc3BhY2V4ZGF0YS5jb20vdjMvbGF1bmNoZXM/bGltaXQ9MTAwJmxhdW5jaF9zdWNjZXNzPXRydWUmbGFuZF9zdWNjZXNzPVwiK3ZhbDtcbiAgICBcbiAgICBcbiAgICBcbiAgICB0aGlzLnNldFN0YXRlKHtzcGlubmVyOnRydWV9KVxuICAgIGF4aW9zKHVybCkudGhlbigocmVzKT0+e1xuICAgICAgICB0aGlzLnNldFN0YXRlKHtzcGlubmVyOmZhbHNlfSlcbiAgICAgICAgdGhpcy5zZXRTdGF0ZSh7c3BhY2VEYXRhOnJlcy5kYXRhfSlcbiAgICAgfSkuY2F0Y2goKGVycik9PntcbiAgICAgICAgdGhpcy5zZXRTdGF0ZSh7c3Bpbm5lcjpmYWxzZX0pO1xuICAgICAgICB0aGlzLnNldFN0YXRlKHtlcnJvcjp0cnVlfSk7XG4gICAgIH0pXG4gICAgfVxuXG5cblxuICAgIHJlbmRlcigpe1xuXG5sZXQgZGF0YUVsZW1lbnQgPSBudWxsO1xuaWYodGhpcy5zdGF0ZS5zcGlubmVyKXtcbmRhdGFFbGVtZW50ID0gPFNwaW5uZXIvPlxuXG59XG5lbHNlIGlmKHRoaXMuc3RhdGUuc3BhY2VEYXRhLmxlbmd0aD09PTApe1xuICAgIGRhdGFFbGVtZW50PTxoMiBzdHlsZSA9e3t0ZXh0QWxpZ246ICdjZW50ZXInLCBjb2xvcjpcInJlZFwiLCBtYXJnaW5Ub3A6ICcyMDBweCd9fT5Pb3BzIS4uLi4uTm8gUmVjb3JkIEZvdW5kPC9oMj4gXG5cbn1cblxuZWxzZSBpZih0aGlzLnN0YXRlLmVycm9yKXtcblxuICAgIGRhdGFFbGVtZW50PTxoMiBzdHlsZSA9e3t0ZXh0QWxpZ246ICdjZW50ZXInLCBjb2xvcjpcInJlZFwiLCBtYXJnaW5Ub3A6ICcyMDBweCd9fT5Pb3BzIS4uLi4uQVBJIEZhaWxlZC4uIFRoZXJlIGFyZSBzb21lIGlzc3VlIGluIGFwaSBvciBuZXR3b3JrLjwvaDI+IFxuXG5cbn1cbmVsc2V7XG5kYXRhRWxlbWVudCA9IDxkaXYgY2xhc3NOYW1lPXtzdHlsZXMuZGl2TWFpbn0+IFxueyB0aGlzLnN0YXRlLnNwYWNlRGF0YS5tYXAoKHJlcyk9PntcbnJldHVybihcbjxkaXYgY2xhc3NOYW1lPXtzdHlsZXMuZGl2Q29sfSBrZXkgPXsgcmVzLmxhdW5jaF9kYXRlX3VuaXh9PiBcbjxwIGNsYXNzTmFtZT17c3R5bGVzLmZhbGNvbklkfSAgPkZhbGNvblNhdCAje3Jlcy5mbGlnaHRfbnVtYmVyfTwvcD5cbjxsYWJlbCBjbGFzc05hbWU9e3N0eWxlcy5sYWJlbH0+IE1pc3Npb24gTmFtZTo8L2xhYmVsPlxuPHAgY2xhc3NOYW1lPXtzdHlsZXMucH0+e3Jlcy5taXNzaW9uX25hbWV9PC9wPlxuPGJyPjwvYnI+XG5cbjxsYWJlbCBjbGFzc05hbWU9e3N0eWxlcy5sYWJlbH0+IExhdW5jaCBZZWFyOjwvbGFiZWw+XG48cCBjbGFzc05hbWU9e3N0eWxlcy5wfT57cmVzLmxhdW5jaF95ZWFyfTwvcD4gICBcblxuPGJyPjwvYnI+XG5cbjxsYWJlbCBjbGFzc05hbWU9e3N0eWxlcy5sYWJlbH0+IFN1Y2Vzc2Z1bCBMYXVuY2g6PC9sYWJlbD5cbjxwIGNsYXNzTmFtZT17c3R5bGVzLnB9PntyZXMubGF1bmNoX3N1Y2Nlc3MgPyBcInRydWVcIiA6IFwiZmFsc2VcIn08L3A+ICBcblxuXG48YnI+PC9icj5cblxuPGxhYmVsIGNsYXNzTmFtZT17c3R5bGVzLmxhYmVsfT4gU3VjZXNzZnVsIExhbmRpbmc6PC9sYWJlbD5cbjxwIGNsYXNzTmFtZT17c3R5bGVzLnB9PntyZXMucm9ja2V0LmZpcnN0X3N0YWdlLmNvcmVzWzBdLmxhbmRfc3VjY2VzcyA/IFwidHJ1ZVwiIDogXCJmYWxzZVwifTwvcD4gIFxuXG5cbiAgICAgIDwvZGl2PlxuXG4pfSkgIH1cbjwvZGl2PlxuXG59XG5cblxuXG5yZXR1cm4gKFxuPGRpdiBjbGFzc05hbWUgPSB7c3R5bGVzLmRpdn0+XG5cblxuICAgIDxoMiBzdHlsZT17e21hcmdpbkxlZnQ6ICcyMHB4J319ID5TcGFjZVggTGF1bmNoIFByb2dyYW08L2gyPlxuPGRpdiBjbGFzc05hbWU9e3N0eWxlcy5kaXZGaWxsdGVyfT5cblxuPGgzPkZpbHRlcjwvaDM+XG5cbjxwIHN0eWxlPXt7dGV4dEFsaWduOiAnY2VudGVyJywgbWFyZ2luQm90dG9tOiAnLTZweCd9fSA+U3VjZXNzZnVsIExhdW5jaDwvcD5cbjxoci8+XG48ZGl2ICBjbGFzc05hbWU9e3N0eWxlcy5idXR0b25EaXZ9ID4gXG48YnV0dG9uIG9uQ2xpY2s9eygpPT50aGlzLmxhdW5jaEhhbmRsZXIodHJ1ZSl9IGNsYXNzTmFtZT17c3R5bGVzLmJ1dHRvbjJ9ID5UcnVlPC9idXR0b24+XG48YnV0dG9uIG9uQ2xpY2s9eygpPT50aGlzLmxhdW5jaEhhbmRsZXIoZmFsc2UpfSAgY2xhc3NOYW1lPXtzdHlsZXMuYnV0dG9uMn0+RmFsc2U8L2J1dHRvbj5cbjwvZGl2PlxuXG5cbjxwIHN0eWxlPXt7dGV4dEFsaWduOiAnY2VudGVyJywgbWFyZ2luQm90dG9tOiAnLTZweCd9fSA+U3VjZXNzZnVsIExhbmRpbmc8L3A+XG48aHIvPlxuPGRpdiAgY2xhc3NOYW1lPXtzdHlsZXMuYnV0dG9uRGl2fSA+IFxuPGJ1dHRvbiBvbkNsaWNrPXsoKT0+dGhpcy5sYW5kaW5nSGFuZGxlcih0cnVlKX0gIGNsYXNzTmFtZT17c3R5bGVzLmJ1dHRvbjJ9ID5UcnVlPC9idXR0b24+XG48YnV0dG9uIG9uQ2xpY2s9eygpPT50aGlzLmxhbmRpbmdIYW5kbGVyKGZhbHNlKX0gIGNsYXNzTmFtZT17c3R5bGVzLmJ1dHRvbjJ9PkZhbHNlPC9idXR0b24+XG48L2Rpdj5cbjxwIHN0eWxlPXt7dGV4dEFsaWduOiAnY2VudGVyJywgbWFyZ2luQm90dG9tOiAnLTZweCd9fSA+TGF1bmNoIFllYXI8L3A+XG48aHIvPlxue3RoaXMuc3RhdGUueWVhci5tYXAoKHkpPT57XG5cbnJldHVybihcbjxkaXYga2V5ID0ge3l9IGNsYXNzTmFtZT17c3R5bGVzLmJ1dHRvbkRpdn0+IFxuPGJ1dHRvbiBvbkNsaWNrID0geygpPT50aGlzLnllYXJGaWx0ZXIoeSl9IGNsYXNzTmFtZT17c3R5bGVzLmJ1dHRvbn0+IHt5fSAgPC9idXR0b24+XG5cbjwvZGl2PlxuKVxuXG59KX1cblxuXG48L2Rpdj5cblxue2RhdGFFbGVtZW50fVxuXG48L2Rpdj5cblxuKVxuXG5cbiAgICB9XG5cblxuXG5cblxufVxuXG5leHBvcnQgZGVmYXVsdCBTcGFjZTtcblxuXG5cblxuIl0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./container/space.js\n");
 
 /***/ }),
 
-/***/ "v4kl":
+/***/ "./container/space.module.css":
+/*!************************************!*\
+  !*** ./container/space.module.css ***!
+  \************************************/
+/*! no static exports found */
 /***/ (function(module, exports) {
 
-// Exports
-module.exports = {
-	"Loader": "Spinner_Loader__1sjje",
-	"load1": "Spinner_load1__2MbOe"
-};
-
+eval("// Exports\nmodule.exports = {\n\t\"divMain\": \"space_divMain__3VJRY\",\n\t\"divCol\": \"space_divCol__3FJz0\",\n\t\"buttonDiv\": \"space_buttonDiv__1ZR4G\",\n\t\"button\": \"space_button__1mK0N\",\n\t\"button2\": \"space_button2__1S43b\",\n\t\"divFillter\": \"space_divFillter__3TZMo\",\n\t\"div\": \"space_div__2xkVz\",\n\t\"falconId\": \"space_falconId__2pCAR\",\n\t\"label\": \"space_label__2q1wR\",\n\t\"p\": \"space_p__1IDlp\"\n};\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9jb250YWluZXIvc3BhY2UubW9kdWxlLmNzcz83M2ZmIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBIiwiZmlsZSI6Ii4vY29udGFpbmVyL3NwYWNlLm1vZHVsZS5jc3MuanMiLCJzb3VyY2VzQ29udGVudCI6WyIvLyBFeHBvcnRzXG5tb2R1bGUuZXhwb3J0cyA9IHtcblx0XCJkaXZNYWluXCI6IFwic3BhY2VfZGl2TWFpbl9fM1ZKUllcIixcblx0XCJkaXZDb2xcIjogXCJzcGFjZV9kaXZDb2xfXzNGSnowXCIsXG5cdFwiYnV0dG9uRGl2XCI6IFwic3BhY2VfYnV0dG9uRGl2X18xWlI0R1wiLFxuXHRcImJ1dHRvblwiOiBcInNwYWNlX2J1dHRvbl9fMW1LME5cIixcblx0XCJidXR0b24yXCI6IFwic3BhY2VfYnV0dG9uMl9fMVM0M2JcIixcblx0XCJkaXZGaWxsdGVyXCI6IFwic3BhY2VfZGl2RmlsbHRlcl9fM1RaTW9cIixcblx0XCJkaXZcIjogXCJzcGFjZV9kaXZfXzJ4a1Z6XCIsXG5cdFwiZmFsY29uSWRcIjogXCJzcGFjZV9mYWxjb25JZF9fMnBDQVJcIixcblx0XCJsYWJlbFwiOiBcInNwYWNlX2xhYmVsX18ycTF3UlwiLFxuXHRcInBcIjogXCJzcGFjZV9wX18xSURscFwiXG59O1xuIl0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./container/space.module.css\n");
 
 /***/ }),
 
-/***/ "zr5I":
+/***/ "./pages/index.js":
+/*!************************!*\
+  !*** ./pages/index.js ***!
+  \************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _container_space__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../container/space */ \"./container/space.js\");\nvar _jsxFileName = \"/Users/localadmin/Downloads/Training/GitHupProjects/my-space-ssr/pages/index.js\";\nvar __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;\n\n\n\nclass Users extends react__WEBPACK_IMPORTED_MODULE_0__[\"Component\"] {\n  static async getInitialProps(ctx) {\n    const res = await fetch('https://api.spacexdata.com/v3/launches?limit=100');\n    const json = await res.json();\n    return {\n      appData: json\n    };\n  }\n\n  render() {\n    return __jsx(\"div\", {\n      __self: this,\n      __source: {\n        fileName: _jsxFileName,\n        lineNumber: 21,\n        columnNumber: 1\n      }\n    }, __jsx(_container_space__WEBPACK_IMPORTED_MODULE_1__[\"default\"], {\n      data: this.props.appData,\n      __self: this,\n      __source: {\n        fileName: _jsxFileName,\n        lineNumber: 23,\n        columnNumber: 5\n      }\n    }));\n  }\n\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Users);//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9wYWdlcy9pbmRleC5qcz80NGQ4Il0sIm5hbWVzIjpbIlVzZXJzIiwiQ29tcG9uZW50IiwiZ2V0SW5pdGlhbFByb3BzIiwiY3R4IiwicmVzIiwiZmV0Y2giLCJqc29uIiwiYXBwRGF0YSIsInJlbmRlciIsInByb3BzIl0sIm1hcHBpbmdzIjoiOzs7Ozs7QUFBQTtBQUNBOztBQU1BLE1BQU1BLEtBQU4sU0FBb0JDLCtDQUFwQixDQUE4QjtBQUUxQixlQUFhQyxlQUFiLENBQTZCQyxHQUE3QixFQUFrQztBQUM5QixVQUFNQyxHQUFHLEdBQUcsTUFBTUMsS0FBSyxDQUFDLGtEQUFELENBQXZCO0FBQ0EsVUFBTUMsSUFBSSxHQUFHLE1BQU1GLEdBQUcsQ0FBQ0UsSUFBSixFQUFuQjtBQUNBLFdBQU87QUFBRUMsYUFBTyxFQUFFRDtBQUFYLEtBQVA7QUFDRDs7QUFHUEUsUUFBTSxHQUFFO0FBR0osV0FDSjtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBLE9BRUksTUFBRSx3REFBRjtBQUFTLFVBQUksRUFBRSxLQUFLQyxLQUFMLENBQVdGLE9BQTFCO0FBQUE7QUFBQTtBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQUEsTUFGSixDQURJO0FBTUM7O0FBbEJ5Qjs7QUFvQmZQLG9FQUFmIiwiZmlsZSI6Ii4vcGFnZXMvaW5kZXguanMuanMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgUmVhY3Qse0NvbXBvbmVudH0gZnJvbSAncmVhY3QnO1xuaW1wb3J0IFNwYWNlIGZyb20gJy4uL2NvbnRhaW5lci9zcGFjZSdcblxuXG5cblxuXG5jbGFzcyBVc2VycyBleHRlbmRzIENvbXBvbmVudCB7XG5cbiAgICBzdGF0aWMgYXN5bmMgZ2V0SW5pdGlhbFByb3BzKGN0eCkge1xuICAgICAgICBjb25zdCByZXMgPSBhd2FpdCBmZXRjaCgnaHR0cHM6Ly9hcGkuc3BhY2V4ZGF0YS5jb20vdjMvbGF1bmNoZXM/bGltaXQ9MTAwJylcbiAgICAgICAgY29uc3QganNvbiA9IGF3YWl0IHJlcy5qc29uKClcbiAgICAgICAgcmV0dXJuIHsgYXBwRGF0YToganNvbiB9XG4gICAgICB9XG5cblxucmVuZGVyKCl7XG5cblxuICAgIHJldHVybiAoXG48ZGl2PlxuICAgICBcbiAgICA8IFNwYWNlICBkYXRhPXt0aGlzLnByb3BzLmFwcERhdGF9ICAvPlxuPC9kaXY+XG4gICAgKTtcbiAgICB9XG59XG5leHBvcnQgZGVmYXVsdCBVc2VyczsiXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./pages/index.js\n");
+
+/***/ }),
+
+/***/ "axios":
+/*!************************!*\
+  !*** external "axios" ***!
+  \************************/
+/*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = require("axios");
+eval("module.exports = require(\"axios\");//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vZXh0ZXJuYWwgXCJheGlvc1wiPzcwYzYiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEiLCJmaWxlIjoiYXhpb3MuanMiLCJzb3VyY2VzQ29udGVudCI6WyJtb2R1bGUuZXhwb3J0cyA9IHJlcXVpcmUoXCJheGlvc1wiKTsiXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///axios\n");
+
+/***/ }),
+
+/***/ "react":
+/*!************************!*\
+  !*** external "react" ***!
+  \************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+eval("module.exports = require(\"react\");//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vZXh0ZXJuYWwgXCJyZWFjdFwiPzU4OGUiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEiLCJmaWxlIjoicmVhY3QuanMiLCJzb3VyY2VzQ29udGVudCI6WyJtb2R1bGUuZXhwb3J0cyA9IHJlcXVpcmUoXCJyZWFjdFwiKTsiXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///react\n");
 
 /***/ })
 

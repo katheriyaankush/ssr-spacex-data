@@ -19,6 +19,7 @@ render(){
 
     return (
 <div>
+     
     < Space  data={this.props.appData}  />
 </div>
     );

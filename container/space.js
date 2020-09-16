@@ -10,15 +10,14 @@ state={
  
     year:[2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017, 2018,2019,2020 ],
     spaceData:[],
-    spinner:false
+    spinner:false,
+    error:false
 
 }
 
 
 
 componentDidMount(){
-
-    //console.log("DibMount", this.props.data)
 
     this.setState({spaceData:this.props.data});
 }
@@ -30,7 +29,10 @@ this.setState({spinner:true})
 axios(url).then((resYear)=>{
     this.setState({spinner:false})
    this.setState({spaceData:resYear.data})
-}).catch((err)=>{})
+}).catch((err)=>{  
+    this.setState({spinner:false})
+    this.setState({error:true})
+})
 
 
 }
@@ -48,6 +50,7 @@ axios(url).then((res)=>{
     this.setState({spaceData:res.data})
  }).catch((err)=>{
     this.setState({spinner:false})
+    this.setState({error:true})
  })
 }
 
@@ -65,7 +68,8 @@ landingHandler=(val)=>{
         this.setState({spinner:false})
         this.setState({spaceData:res.data})
      }).catch((err)=>{
-        this.setState({spinner:false})
+        this.setState({spinner:false});
+        this.setState({error:true});
      })
     }
 
@@ -73,7 +77,6 @@ landingHandler=(val)=>{
 
     render(){
 
-//console.log("Vaa==",this.state.spaceData[1]);
 let dataElement = null;
 if(this.state.spinner){
 dataElement = <Spinner/>
@@ -81,6 +84,13 @@ dataElement = <Spinner/>
 }
 else if(this.state.spaceData.length===0){
     dataElement=<h2 style ={{textAlign: 'center', color:"red", marginTop: '200px'}}>Oops!.....No Record Found</h2> 
+
+}
+
+else if(this.state.error){
+
+    dataElement=<h2 style ={{textAlign: 'center', color:"red", marginTop: '200px'}}>Oops!.....API Failed.. There are some issue in api or network.</h2> 
+
 
 }
 else{
