@@ -1,0 +1,187 @@
+.divMain {
+display:grid;
+    border: 0px solid grey;
+    margin-left: 220px;
+    padding: 20px;
+    width: 72%;
+  grid-template-columns: auto auto auto auto auto;
+ 
+
+}
+
+.divCol{
+    float: left;
+width: 90%;
+margin-left: 10px;
+margin-top: 10px;
+margin-bottom: 10px;
+padding: 5px;
+
+background-color: white;
+border-top-left-radius: 5px;         
+border-top-right-radius: 5px;         
+border-bottom-left-radius: 5px;         
+border-bottom-right-radius: 5px;   
+
+
+}
+
+.buttonDiv{
+   
+    float: left;
+    grid-template-columns: auto auto;
+    padding-right: 10px;
+    margin-top: 10px;
+    margin-left: 15px;
+}
+
+.button{
+
+    background-color: yellowgreen;
+    width: 50px;
+    border: none;
+    height: 25px;
+
+    border-top-left-radius: 5px;         
+border-top-right-radius: 5px;         
+border-bottom-left-radius: 5px;         
+border-bottom-right-radius: 5px;   
+}
+.button:focus{
+    background-color: #5bce38;
+    outline: none;
+}
+.button:hover{
+    background-color: #96db81;
+   
+}
+
+.button2{
+
+    background-color: yellowgreen;
+    width: 50px;
+    border: none;
+    height: 25px;
+    margin-bottom: 20px;
+    margin-right: 10px;
+    margin-left: 6px;
+    border-top-left-radius: 5px;         
+border-top-right-radius: 5px;         
+border-bottom-left-radius: 5px;         
+border-bottom-right-radius: 5px;   
+}
+
+.button2:focus{
+    background-color: #5bce38;
+    outline: none;
+}
+.button2:hover{
+    background-color: #96db81;
+   
+}
+
+.divFillter{
+margin-left: 10px;
+position: absolute;
+width: 15%;
+padding: 10px;
+background-color:white;
+margin-top: 28px;
+border-top-left-radius: 5px;         
+border-top-right-radius: 5px;         
+border-bottom-left-radius: 5px;         
+border-bottom-right-radius: 5px;   
+
+}
+
+.div{
+
+    background-color: #e4e2e2;
+    width: 90%;
+    margin-left: 60px;
+    min-height: 100%;
+    position: absolute;
+}
+
+.falconId{
+
+    color: #042e7cef;
+
+
+}
+
+.label{
+
+font-weight: bold;
+line-height: 30px;
+display: inline;
+
+}
+
+.p{
+
+    display: inline;
+    color: #8f8c8c;
+    margin-left: 5px;
+}
+
+@media (max-width: 1166px ){
+
+    .divMain{
+
+    grid-template-columns: auto auto auto;
+
+    }
+    .divFillter{
+
+        width: 18%;
+    }
+
+}
+@media (max-width: 971px ){
+
+    .divMain{
+
+    grid-template-columns: auto auto ;
+    width: 50%;
+    float: none;
+    
+
+    }
+    .divFillter{
+
+        width: 23%;
+    
+       
+    }
+
+}
+
+
+@media (max-width: 700px ){
+
+    .divMain{
+
+    grid-template-columns: auto  ;
+    width: 58%;
+    margin-left: 60px;
+
+
+    }
+    .divFillter{
+
+        width: 50%;
+        margin-left: 250px;
+        position: static;
+        height:  590px;
+        margin-bottom: -20px;
+        margin-left: 90px;
+
+    }
+    .div{
+
+        width: 400px;
+        margin-left: 120px;
+    }
+
+}
